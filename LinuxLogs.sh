@@ -1,5 +1,15 @@
 #!/bin/bash
-
+echo "
+Automation for Enabling Logs For 
+╔──────────────────────────────────────────╗
+│    _____                                 │
+│ __|_    |__ ____ ____   _ __   _ __ __   │
+│|    |      |    |    \ | |  | | |\ ` /   │
+│|    |_     |    |     \| |  |_| |/   \   │
+│|______|  __|____|__/\____|______/__/\_\  │
+│   |_____|                                │
+╚──────────────────────────────────────────╝
+By j33rr."
 # Step 1: Prompt the user for the destination IP address
 read -p "Enter the destination IP address for the Event Collector/QRadar server: " DEST_IP
 
