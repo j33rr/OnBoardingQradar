@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "
-Automation for Enabling Logs For 
+Automation for Enabling Logs Configuration 
 ╔──────────────────────────────────────────╗
 │    _____                                 │
 │ __|_    |__ ____ ____   _ __   _ __ __   │
