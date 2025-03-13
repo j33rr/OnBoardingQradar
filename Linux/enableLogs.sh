@@ -102,6 +102,8 @@ sudo bash -c 'cat <<EOF >> /etc/rsyslog.conf
 *.info;mail.none;authpriv.none;daemon.none;cron.none @@'"$DEST_IP"':514
 authpriv.* @@'"$DEST_IP"':514
 local7.notice @@'"$DEST_IP"':514
+local6.* @@'"$DEST_IP"':514
+local5.* @@'"$DEST_IP"':514
 EOF'
 
 # Step 5: Restart rsyslog service
