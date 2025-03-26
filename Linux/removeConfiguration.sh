@@ -25,6 +25,9 @@ echo "Step 3: Removing remote logging configuration from /etc/rsyslog.conf..."
 sudo sed -i '/^*.info;mail.none;authpriv.none;daemon.none;cron.none @@.*:514/d' /etc/rsyslog.conf
 sudo sed -i '/^authpriv.* @@.*:514/d' /etc/rsyslog.conf
 sudo sed -i '/^local7.notice @@.*:514/d' /etc/rsyslog.conf
+sudo sed -i '/^local6.* @@.*:514/d' /etc/rsyslog.conf
+sudo sed -i '/^local5.* @@.*:514/d' /etc/rsyslog.conf
+
 
 # Step 4: Restart rsyslog service
 echo "Step 4: Restarting rsyslog service..."
