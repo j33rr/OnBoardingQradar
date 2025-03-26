@@ -1,17 +1,16 @@
 #!/bin/bash
 
-echo "
-Automation for Enabling Logs Configuration 
+echo -e "
+Automation for Enabling Logs Configuration
 ╔──────────────────────────────────────────╗
 │    _____                                 │
 │ __|_    |__ ____ ____   _ __   _ __ __   │
-│|    |      |    |    \ | |  | | |\ ` /   │
+│|    |      |    |    \ | |  | | |\  /   │
 │|    |_     |    |     \| |  |_| |/   \   │
 │|______|  __|____|__/\____|______/__/\_\  │
 │   |_____|                                │
 ╚──────────────────────────────────────────╝
 By j33rr."
-
 # Step 1: Detect the package manager and install rsyslog if not already installed
 echo "Step 1: Checking and installing rsyslog..."
 
