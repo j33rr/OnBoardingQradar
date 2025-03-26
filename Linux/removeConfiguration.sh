@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "
+echo -e "
 Automation for Removing Logs Configuration
 ╔──────────────────────────────────────────╗
 │    _____                                 │
