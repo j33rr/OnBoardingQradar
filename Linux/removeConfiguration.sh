@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo -e "
-Automation for Removing Logs Configuration
+Automation for Enabling Logs Configuration
 ╔──────────────────────────────────────────╗
 │    _____                                 │
 │ __|_    |__ ____ ____   _ __   _ __ __   │
-│|    |      |    |    \ | |  | | |\ ` /   │
+│|    |      |    |    \ | |  | | |\  /    │
 │|    |_     |    |     \| |  |_| |/   \   │
 │|______|  __|____|__/\____|______/__/\_\  │
 │   |_____|                                │
