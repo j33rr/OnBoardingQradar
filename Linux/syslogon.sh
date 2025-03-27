@@ -11,6 +11,7 @@ Automation for Enabling Logs Configuration
 │   |_____|                                │
 ╚──────────────────────────────────────────╝
 By j33rr."
+
 # Step 1: Detect the package manager and install rsyslog if not already installed
 echo "Step 1: Checking and installing rsyslog..."
 
@@ -69,14 +70,30 @@ else
     echo "rsyslog is already installed."
 fi
 
-# Step 2: Prompt the user for the destination IP address
-read -p "Enter the destination IP address for the Event Collector/QRadar server: " DEST_IP
+# Step 2: Prompt the user for the number of destination IP addresses
+read -p "Enter the number of destination IP addresses: " NUM_IPS
 
-# Validate the input (basic IP format check)
-if [[ ! $DEST_IP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    echo "Error: Invalid IP address format. Please enter a valid IP address."
+# Validate the input (check if it's a positive integer)
+if ! [[ $NUM_IPS =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: Invalid input. Please enter a positive integer."
     exit 1
 fi
+
+# Array to store the destination IP addresses
+DEST_IPS=()
+
+# Loop to collect the destination IP addresses
+for ((i=1; i<=NUM_IPS; i++)); do
+    read -p "Enter destination IP address $i: " DEST_IP
+
+    # Validate the input (basic IP format check)
+    if [[ ! $DEST_IP =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        echo "Error: Invalid IP address format. Please enter a valid IP address."
+        exit 1
+    fi
+
+    DEST_IPS+=("$DEST_IP")
+done
 
 # Step 3: Enable Command Line Logging
 echo "Step 2: Enabling command line logging..."
@@ -96,14 +113,16 @@ echo "Step 3: Configuring rsyslog..."
 # Add local7.* /var/log/cmdline before the MODULES block
 sudo sed -i '/^#################$/i local7.* /var/log/cmdline' /etc/rsyslog.conf
 
-# Add remote logging configuration at the end of the file
-sudo bash -c 'cat <<EOF >> /etc/rsyslog.conf
-*.info;mail.none;authpriv.none;daemon.none;cron.none @@'"$DEST_IP"':514
-authpriv.* @@'"$DEST_IP"':514
-local7.notice @@'"$DEST_IP"':514
-local6.* @@'"$DEST_IP"':514
-local5.* @@'"$DEST_IP"':514
-EOF'
+# Add remote logging configuration for each IP address
+for DEST_IP in "${DEST_IPS[@]}"; do
+    sudo bash -c "cat <<EOF >> /etc/rsyslog.conf
+*.info;mail.none;authpriv.none;daemon.none;cron.none @@${DEST_IP}:514
+authpriv.* @@${DEST_IP}:514
+local7.notice @@${DEST_IP}:514
+local6.* @@${DEST_IP}:514
+local5.* @@${DEST_IP}:514
+EOF"
+done
 
 # Step 5: Restart rsyslog service
 echo "Step 4: Restarting rsyslog service..."
