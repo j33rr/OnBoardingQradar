@@ -110,10 +110,9 @@ EOF'
 # Step 4: Enable General Logging + Command Line Logging
 echo "Step 3: Configuring rsyslog..."
 
-# Add local7.* /var/log/cmdline before the MODULES block
-if ! grep -q "local7.* /var/log/cmdline" /etc/rsyslog.conf; then
-    # Add local7.* /var/log/cmdline before the MODULES block
-    sudo sed -i '/^#################$/i local7.* /var/log/cmdline' /etc/rsyslog.conf
+# Insert local7.* /var/log/cmdline at line 12 if it doesn't already exist
+if ! sudo sed -n '12p' /etc/rsyslog.conf | grep -q "local7.* /var/log/cmdline"; then
+    sudo sed -i '12i local7.* /var/log/cmdline' /etc/rsyslog.conf
 fi
 
 # Add remote logging configuration for each IP address
