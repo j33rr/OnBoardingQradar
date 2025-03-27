@@ -111,7 +111,10 @@ EOF'
 echo "Step 3: Configuring rsyslog..."
 
 # Add local7.* /var/log/cmdline before the MODULES block
-sudo sed -i '/^#################$/i local7.* /var/log/cmdline' /etc/rsyslog.conf
+if ! grep -q "local7.* /var/log/cmdline" /etc/rsyslog.conf; then
+    # Add local7.* /var/log/cmdline before the MODULES block
+    sudo sed -i '/^#################$/i local7.* /var/log/cmdline' /etc/rsyslog.conf
+fi
 
 # Add remote logging configuration for each IP address
 for DEST_IP in "${DEST_IPS[@]}"; do
