@@ -123,6 +123,11 @@ authpriv.* @@${DEST_IP}:514
 local7.notice @@${DEST_IP}:514
 local6.* @@${DEST_IP}:514
 local5.* @@${DEST_IP}:514
+local4.* @@${DEST_IP}:514
+local3.* @@${DEST_IP}:514
+local2.* @@${DEST_IP}:514
+local1.* @@${DEST_IP}:514
+local0.* @@${DEST_IP}:514
 EOF"
 done
 
